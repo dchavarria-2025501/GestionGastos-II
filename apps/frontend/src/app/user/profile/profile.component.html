@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Mi perfil</h2>
+  <ng-container *ngIf="usuario">
+    <div class="profile-field">
+      <span class="label">Nombre</span>
+      <span class="value">{{ usuario.nombre }}</span>
+    </div>
+    <div class="profile-field">
+      <span class="label">Email</span>
+      <span class="value">{{ usuario.email }}</span>
+    </div>
+    <div class="profile-field">
+      <span class="label">Rol</span>
+      <span class="role-badge" [ngClass]="usuario.role">{{ usuario.role }}</span>
+    </div>
+    <div class="profile-field">
+      <span class="label">Miembro desde</span>
+      <span class="value">{{ usuario.createdAt | date: 'medium' }}</span>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Crear cuenta</h2>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <p class="exito" *ngIf="exito">{{ exito }}</p>
+
+  <form (ngSubmit)="onSubmit()">
+    <label>Nombre</label>
+    <input type="text" name="nombre" [(ngModel)]="nombre" placeholder="Tu nombre" />
+
+    <label>Email</label>
+    <input type="email" name="email" [(ngModel)]="email" placeholder="tucorreo@ejemplo.com" />
+
+    <label>Password</label>
+    <input type="password" name="password" [(ngModel)]="password" placeholder="********" />
+
+    <label>Confirmar password</label>
+    <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" placeholder="********" />
+
+    <button type="submit" [disabled]="cargando">
+      {{ cargando ? 'Creando cuenta...' : 'Registrarme' }}
+    </button>
+  </form>
+
+  <p class="auth-footer">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesion</a></p>
+</div>

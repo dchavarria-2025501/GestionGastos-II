@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <span class="navbar-brand">GestionGastos</span>
+
+  <div class="navbar-links">
+    <ng-container *ngIf="auth.isLoggedIn(); else invitado">
+      <a routerLink="/dashboard">Inicio</a>
+      <a routerLink="/profile">Perfil</a>
+      <a *ngIf="auth.hasRole('admin')" routerLink="/admin/dashboard">Admin</a>
+      <span class="navbar-user">{{ auth.currentUser()?.nombre }} ({{ auth.currentUser()?.role }})</span>
+      <button (click)="logout()">Salir</button>
+    </ng-container>
+    <ng-template #invitado>
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Registro</a>
+    </ng-template>
+  </div>
+</nav>

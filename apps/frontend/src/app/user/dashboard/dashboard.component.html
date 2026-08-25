@@ -1,0 +1,177 @@
+<div class="dashboard-layout">
+  <!-- Sidebar Beige -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="/assets/logo/logo.png" alt="Controla" class="brand-logo" />
+    </div>
+
+    <nav class="sidebar-menu">
+      <a routerLink="/dashboard" class="menu-item active">
+        <span class="icon">⊞</span> Dashboard
+      </a>
+      <a routerLink="/fondo-emergencia" class="menu-item">
+        <span class="icon">📋</span> Fondo Emergencia
+      </a>
+      <a routerLink="/gastos" class="menu-item">
+        <span class="icon">👛</span> Gastos
+      </a>
+      <a routerLink="/ingresos" class="menu-item">
+        <span class="icon">📊</span> Ingresos
+      </a>
+      <a routerLink="/impuestos" class="menu-item">
+        <span class="icon">🏷️</span> Impuestos
+      </a>
+      <a routerLink="/reportes" class="menu-item">
+        <span class="icon">🔔</span> Reportes
+      </a>
+
+      <div class="menu-divider"></div>
+
+      <a routerLink="/tarjeta" class="menu-item">
+        <span class="icon">💳</span> Mi Tarjeta
+      </a>
+      <a routerLink="/profile" class="menu-item">
+        <span class="icon">👤</span> Perfil
+      </a>
+
+      <div class="menu-divider"></div>
+
+      <button class="menu-item logout-btn">
+        <span class="icon">🚪</span> Cerrar Sesión
+      </button>
+    </nav>
+  </aside>
+
+  <!-- Área Principal -->
+  <main class="main-wrapper">
+    <!-- Header Verde Oliva -->
+    <header class="top-header">
+      <div class="header-title">
+        <h1>Bienvenido, Usuario</h1>
+        <p>Empecemos a Organizar tus Ganancias! ¿Por donde Empezamos?</p>
+      </div>
+
+      <div class="header-right">
+        <div class="search-bar">
+          <input type="text" placeholder="Search here" />
+          <button class="search-btn">🔍</button>
+        </div>
+        <div class="user-profile">
+          <div class="user-info">
+            <span class="user-name">Usuario</span>
+            <span class="user-role">USER</span>
+          </div>
+          <div class="user-avatar">
+            <img src="/assets/logo/logo.png" alt="Avatar" />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Panel Oscuro de Tarjetas -->
+    <section class="dashboard-body">
+      <!-- Tarjeta Izquierda: Mi cuenta y Balance -->
+      <div class="card card-balance">
+        <div class="card-header">
+          <h3>Mi cuenta y Balance</h3>
+          <span class="dots">•••</span>
+        </div>
+
+        <!-- Banner Dorado de Saldo -->
+        <div class="balance-card">
+          <div class="balance-info">
+            <span class="balance-label">Balance Total</span>
+            <h2 class="balance-amount">Q 25,000<span>.00</span></h2>
+          </div>
+          <div class="balance-icon">
+            <img src="/assets/logo/logo.png" alt="Controla Icon" />
+          </div>
+          <div class="card-footer-info">
+            <span class="card-number">**** 123-456-7890 📋</span>
+            <span class="card-date">Abril 2028</span>
+          </div>
+        </div>
+
+        <!-- Gráfica Simulada de Distribución -->
+        <div class="chart-container">
+          <div class="chart-mock">
+            <!-- Representación visual de porcentajes -->
+            <div class="chart-legend">
+              <span class="leg-emergencia">Fondo Emergencia 6.8%</span>
+              <span class="leg-impuestos">Impuestos 16.1%</span>
+              <span class="leg-gastos">Gastos 24.4%</span>
+              <span class="leg-ingresos">Ingresos 52.7%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta Derecha: Últimos Gastos -->
+      <div class="card card-gastos">
+        <div class="card-header">
+          <h3>Ultimos Gastos</h3>
+          <div class="order-by">Ordena <span>Por ▼</span></div>
+        </div>
+
+        <!-- Tabla Estilizada de Transacciones -->
+        <div class="gastos-table-wrapper">
+          <div class="table-head">
+            <span>Clientes</span>
+            <span>Fecha</span>
+            <span>Cantidad</span>
+            <span>Resultado</span>
+          </div>
+
+          <div class="table-body">
+            <div class="table-row">
+              <div class="cell-client"><strong>EGSSA</strong><small>Empresa Luz</small></div>
+              <div class="cell-date"><strong>Hoy</strong><small>Hace 2m</small></div>
+              <div class="cell-amount"><strong>Q. 450.00</strong><small>Recibo</small></div>
+              <div class="cell-status completed">✓ Completado</div>
+            </div>
+
+            <div class="table-row">
+              <div class="cell-client"><strong>Claro</strong><small>Internet</small></div>
+              <div class="cell-date"><strong>Hoy</strong><small>Hace 5m</small></div>
+              <div class="cell-amount"><strong>Q. 355.00</strong><small>Transferencia</small></div>
+              <div class="cell-status completed">✓ Completado</div>
+            </div>
+
+            <div class="table-row">
+              <div class="cell-client"><strong>AGUA</strong><small>Mario Ferguson</small></div>
+              <div class="cell-date"><strong>Ayer</strong><small>7:30 AM</small></div>
+              <div class="cell-amount"><strong>Q. 500</strong><small>Transferencia</small></div>
+              <div class="cell-status completed">✓ Completado</div>
+            </div>
+
+            <div class="table-row">
+              <div class="cell-client"><strong>Karla Marroquin</strong><small>Cuenta de Banco</small></div>
+              <div class="cell-date"><strong>Ayer</strong><small>1:18 PM</small></div>
+              <div class="cell-amount"><strong>Q. 1,000</strong><small>Tranferencia</small></div>
+              <div class="cell-status completed">✓ Completado</div>
+            </div>
+
+            <div class="table-row">
+              <div class="cell-client"><strong>Despensa Familia</strong><small>Empresa</small></div>
+              <div class="cell-date"><strong>Hace 2D</strong><small>4:18 PM</small></div>
+              <div class="cell-amount"><strong>Q. 500</strong><small>Recibo</small></div>
+              <div class="cell-status completed">✓ Completado</div>
+            </div>
+
+            <div class="table-row">
+              <div class="cell-client"><strong>Cesar Martinez</strong><small>Cuenta de Banco</small></div>
+              <div class="cell-date"><strong>Hace 2D</strong><small>10:31 AM</small></div>
+              <div class="cell-amount"><strong>Q. 1,000</strong><small>Transferencia</small></div>
+              <div class="cell-status completed">✓ Completado</div>
+            </div>
+          </div>
+
+          <div class="table-footer">
+            <span>Ver los demás Gastos</span>
+            <span class="chevron">∨</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
