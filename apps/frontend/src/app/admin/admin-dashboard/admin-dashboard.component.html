@@ -1,0 +1,35 @@
+<div class="wide-container">
+  <h2>Panel de administracion</h2>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of usuarios">
+        <td>{{ u.nombre }}</td>
+        <td>{{ u.email }}</td>
+        <td>
+          <ng-container *ngIf="editandoId === u.id; else soloLectura">
+            <select [(ngModel)]="rolEditado">
+              <option value="user">user</option>
+              <option value="admin">admin</option>
+            </select>
+          </ng-container>
+          <ng-template #soloLectura><span class="role-badge" [ngClass]="u.role">{{ u.role }}</span></ng-template>
+        </td>
+        <td class="actions-cell">
+          <button *ngIf="editandoId !== u.id" (click)="editarRol(u)">Editar rol</button>
+          <button *ngIf="editandoId === u.id" (click)="guardarRol(u)">Guardar</button>
+          <button class="danger" (click)="eliminar(u)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

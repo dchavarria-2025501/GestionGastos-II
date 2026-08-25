@@ -1,0 +1,7 @@
+<div class="session-modal-backdrop" *ngIf="session.sessionExpired()">
+  <div class="session-modal" role="alertdialog" aria-live="assertive">
+    <h3>Sesion finalizada</h3>
+    <p>La sesión expiró o venció por mostrar inactividad.</p>
+    <button type="button" (click)="volverAlLogin()">Ir al login</button>
+  </div>
+</div>
