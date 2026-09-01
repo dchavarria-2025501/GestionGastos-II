@@ -1,0 +1,72 @@
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <img
+      src="assets/logo/logo.png"
+      alt="Controla"
+      [class.oculto]="!logoCargado"
+      (load)="onLogoLoad()"
+      (error)="onLogoError()"
+    />
+    <span *ngIf="!logoCargado" style="font-weight:800; font-family:'Sora',sans-serif; color:#4e4a40;">Controla</span>
+  </div>
+
+  <nav class="sidebar-menu">
+    <a class="menu-item" [class.active]="activo === 'dashboard'" routerLink="/dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+      Dashboard
+    </a>
+
+    <button class="menu-item" type="button" (click)="avisarProximamente()">
+      <span class="menu-emoji">📒</span>
+      Fondo Emergencia
+    </button>
+
+    <a class="menu-item" [class.active]="activo === 'gastos'" routerLink="/gastos">
+      <span class="menu-emoji">💼</span>
+      Gastos
+    </a>
+
+    <button class="menu-item" type="button" (click)="avisarProximamente()">
+      <span class="menu-emoji">📈</span>
+      Ingresos
+    </button>
+
+    <button class="menu-item" type="button" (click)="avisarProximamente()">
+      <span class="menu-emoji">🧾</span>
+      Impuestos
+    </button>
+
+    <button class="menu-item" type="button" (click)="avisarProximamente()">
+      <span class="menu-emoji">🔔</span>
+      Reportes
+    </button>
+
+    <div class="menu-divider"></div>
+
+    <button class="menu-item" type="button" (click)="avisarProximamente()">
+      <span class="menu-emoji">💳</span>
+      Mi Tarjeta
+    </button>
+
+    <a class="menu-item" routerLink="/profile">
+      <span class="menu-emoji">👤</span>
+      Perfil
+    </a>
+
+    <div class="menu-divider"></div>
+
+    <button class="menu-item" type="button" (click)="logout()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+        <polyline points="16 17 21 12 16 7"></polyline>
+        <line x1="21" y1="12" x2="9" y2="12"></line>
+      </svg>
+      Cerrar Sesion
+    </button>
+  </nav>
+</aside>

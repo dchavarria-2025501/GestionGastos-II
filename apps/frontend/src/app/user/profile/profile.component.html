@@ -1,6 +1,29 @@
-<div class="container">
+<div class="container animar-entrada profile-container">
   <h2>Mi perfil</h2>
-  <ng-container *ngIf="usuario">
+
+  <ng-container *ngIf="auth.currentUser() as usuario">
+    <div class="profile-avatar-wrap">
+      <div class="profile-avatar">
+        <img *ngIf="usuario.avatarData" [src]="usuario.avatarData" alt="Foto de perfil" />
+        <svg *ngIf="!usuario.avatarData" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+
+      <input
+        #inputArchivo
+        type="file"
+        accept="image/*"
+        class="oculto"
+        (change)="onArchivoSeleccionado($event)"
+      />
+      <button type="button" class="profile-avatar-btn" (click)="abrirSelectorDeArchivo()" [disabled]="subiendo">
+        {{ subiendo ? 'Subiendo...' : 'Cambiar foto' }}
+      </button>
+      <p class="error" *ngIf="error">{{ error }}</p>
+    </div>
+
     <div class="profile-field">
       <span class="label">Nombre</span>
       <span class="value">{{ usuario.nombre }}</span>

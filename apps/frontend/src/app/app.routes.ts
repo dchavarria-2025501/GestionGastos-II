@@ -18,6 +18,16 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'gastos',
+    loadComponent: () => import('./user/gastos/gastos.component').then((m) => m.GastosComponent),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'gastos',
+    loadComponent: () => import('./user/gastos/gastos.component').then((m) => m.GastosComponent),
+    canActivate: [authGuard],
+  },
+  {
     path: 'profile',
     loadComponent: () => import('./user/profile/profile.component').then((m) => m.ProfileComponent),
     canActivate: [authGuard],

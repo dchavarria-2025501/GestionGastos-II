@@ -50,6 +50,16 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  /** Sube/actualiza la foto de perfil (como data URL base64) del usuario actual. */
+  updateAvatar(avatarData: string): Observable<{ user: Usuario }> {
+    return this.http.put<{ user: Usuario }>(`${API_URL}/avatar`, { avatarData }).pipe(
+      tap((res) => {
+        localStorage.setItem(USER_KEY, JSON.stringify(res.user));
+        this.currentUser.set(res.user);
+      })
+    );
+  }
+
   /** Usado por el interceptor cuando el backend indica que el token vencio o es invalido. */
   limpiarPorExpiracion(): void {
     this.limpiarSesionLocal();

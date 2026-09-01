@@ -2,14 +2,18 @@ import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
+import movimientoRoutes from './routes/movimiento.routes';
 
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+// Limite mas alto que el default (100kb) para poder recibir fotos de
+// perfil codificadas en base64 desde /api/auth/avatar.
+app.use(express.json({ limit: '4mb' }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/movimientos', movimientoRoutes);
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 

@@ -1,12 +1,17 @@
 <nav class="navbar">
-  <span class="navbar-brand">GestionGastos</span>
+  <div class="navbar-left">
+    <button type="button" class="navbar-back" (click)="volver()" aria-label="Regresar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Volver
+    </button>
+    <span class="navbar-brand">GestionGastos</span>
+  </div>
 
   <div class="navbar-links">
     <ng-container *ngIf="auth.isLoggedIn(); else invitado">
-      <a routerLink="/dashboard">Inicio</a>
-      <a routerLink="/profile">Perfil</a>
-      <a *ngIf="auth.hasRole('admin')" routerLink="/admin/dashboard">Admin</a>
-      <span class="navbar-user">{{ auth.currentUser()?.nombre }} ({{ auth.currentUser()?.role }})</span>
       <button (click)="logout()">Salir</button>
     </ng-container>
     <ng-template #invitado>

@@ -1,3 +1,7 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<div class="app-shell">
+  <app-navbar *ngIf="mostrarNavbarGenerico()"></app-navbar>
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 <app-session-expired-modal></app-session-expired-modal>

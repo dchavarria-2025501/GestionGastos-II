@@ -1,26 +1,84 @@
-<div class="container">
-  <h2>Crear cuenta</h2>
+<div class="pagina-auth">
+  <div class="container animar-entrada">
+    <div class="login-logo login-logo-compacto">
+      <img
+        src="assets/logo/logo.png"
+        alt="Logo de la empresa"
+        class="login-logo-img"
+        [class.oculto]="!logoCargado"
+        (load)="onLogoLoad()"
+        (error)="onLogoError()"
+      />
+      <span class="login-logo-placeholder" *ngIf="!logoCargado">LOGO</span>
+    </div>
 
-  <p class="error" *ngIf="error">{{ error }}</p>
-  <p class="exito" *ngIf="exito">{{ exito }}</p>
+    <h2>Crear cuenta</h2>
 
-  <form (ngSubmit)="onSubmit()">
-    <label>Nombre</label>
-    <input type="text" name="nombre" [(ngModel)]="nombre" placeholder="Tu nombre" />
+    <p class="error" *ngIf="error">{{ error }}</p>
+    <p class="exito" *ngIf="exito">{{ exito }}</p>
 
-    <label>Email</label>
-    <input type="email" name="email" [(ngModel)]="email" placeholder="tucorreo@ejemplo.com" />
+    <form (ngSubmit)="onSubmit()">
+      <label>Nombre</label>
+      <input type="text" name="nombre" [(ngModel)]="nombre" placeholder="Tu nombre" />
 
-    <label>Password</label>
-    <input type="password" name="password" [(ngModel)]="password" placeholder="********" />
+      <label>Email</label>
+      <input type="email" name="email" [(ngModel)]="email" placeholder="tucorreo@ejemplo.com" />
 
-    <label>Confirmar password</label>
-    <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" placeholder="********" />
+      <label>Password</label>
+      <div class="password-field">
+        <input
+          [type]="mostrarPassword ? 'text' : 'password'"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="********"
+        />
+        <button
+          type="button"
+          class="password-toggle"
+          (click)="mostrarPassword = !mostrarPassword"
+          [attr.aria-label]="mostrarPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+        >
+          <svg *ngIf="!mostrarPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          <svg *ngIf="mostrarPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+          </svg>
+        </button>
+      </div>
 
-    <button type="submit" [disabled]="cargando">
-      {{ cargando ? 'Creando cuenta...' : 'Registrarme' }}
-    </button>
-  </form>
+      <label>Confirmar password</label>
+      <div class="password-field">
+        <input
+          [type]="mostrarConfirmPassword ? 'text' : 'password'"
+          name="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          placeholder="********"
+        />
+        <button
+          type="button"
+          class="password-toggle"
+          (click)="mostrarConfirmPassword = !mostrarConfirmPassword"
+          [attr.aria-label]="mostrarConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+        >
+          <svg *ngIf="!mostrarConfirmPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          <svg *ngIf="mostrarConfirmPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+          </svg>
+        </button>
+      </div>
 
-  <p class="auth-footer">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesion</a></p>
+      <button type="submit" [disabled]="cargando">
+        {{ cargando ? 'Creando cuenta...' : 'Registrarme' }}
+      </button>
+    </form>
+
+    <p class="auth-footer">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesion</a></p>
+  </div>
 </div>

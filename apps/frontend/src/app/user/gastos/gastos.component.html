@@ -1,0 +1,95 @@
+<div class="dashboard-layout">
+  <app-dashboard-sidebar activo="gastos"></app-dashboard-sidebar>
+
+  <div class="main-wrapper">
+    <header class="top-header">
+      <div class="header-title">
+        <h1>Mis Gastos</h1>
+        <p>Registra y revisa todos tus gastos en un solo lugar.</p>
+      </div>
+
+      <div class="header-right">
+        <div class="user-profile">
+          <div class="user-info">
+            <span class="user-name">{{ auth.currentUser()?.nombre }}</span>
+            <span class="user-role">{{ auth.currentUser()?.role?.toUpperCase() }}</span>
+          </div>
+          <div class="user-avatar">
+            <img *ngIf="auth.currentUser()?.avatarData" [src]="auth.currentUser()?.avatarData" alt="Foto de perfil" />
+            <svg *ngIf="!auth.currentUser()?.avatarData" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="20" fill="#bfe3f0"></circle>
+              <circle cx="27" cy="10" r="5" fill="#ffffff" opacity="0.9"></circle>
+              <path d="M0 30 Q10 19 20 27 T40 25 V40 H0 Z" fill="#8fbf6b"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-body gastos-body">
+      <div class="card">
+        <div class="card-header">
+          <h3>Agregar gasto</h3>
+        </div>
+
+        <div class="balance-card gastos-total-card">
+          <span class="balance-label">Total en gastos</span>
+          <p class="balance-amount">
+            <span class="balance-moneda">Q</span>
+            <span class="balance-entero">{{ totalGastosFormateado.split('.')[0] }}</span>
+            <span class="balance-decimales">.{{ totalGastosFormateado.split('.')[1] }}</span>
+          </p>
+        </div>
+
+        <p class="error" *ngIf="error">{{ error }}</p>
+
+        <form (ngSubmit)="agregarGasto()" class="gastos-form">
+          <label>Descripcion</label>
+          <input type="text" name="descripcion" [(ngModel)]="descripcionNueva" placeholder="Ej. Supermercado, Renta, Internet..." />
+
+          <label>Monto (Q)</label>
+          <input type="number" name="monto" [(ngModel)]="montoNuevo" placeholder="0.00" min="0" step="0.01" />
+
+          <button type="submit" [disabled]="guardando">
+            {{ guardando ? 'Guardando...' : 'Agregar gasto' }}
+          </button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Historial de gastos</h3>
+          <span>{{ gastos.length }} en total</span>
+        </div>
+
+        <ng-container *ngIf="!cargando">
+          <ng-container *ngIf="gastos.length > 0; else sinGastos">
+            <div class="table-head">
+              <span>Descripcion</span>
+              <span>Fecha</span>
+              <span>Monto</span>
+              <span>Acciones</span>
+            </div>
+
+            <div class="table-body gastos-table-body">
+              <div class="table-row" *ngFor="let gasto of gastos">
+                <span>{{ gasto.descripcion }}</span>
+                <span>{{ formatearFecha(gasto.fecha) }}</span>
+                <span>Q. {{ formatearMonto(gasto.monto) }}</span>
+                <span class="cell-status">
+                  <button type="button" class="eliminar-btn" (click)="eliminarGasto(gasto.id)" aria-label="Eliminar gasto">
+                    &times;
+                  </button>
+                </span>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-template #sinGastos>
+            <p class="tabla-vacia">Todavia no has registrado ningun gasto. ¡Agrega el primero!</p>
+          </ng-template>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
