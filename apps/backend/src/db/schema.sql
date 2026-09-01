@@ -19,7 +19,21 @@ CREATE TABLE IF NOT EXISTS usuarios (
   email          VARCHAR(150) NOT NULL UNIQUE,
   password_hash  VARCHAR(255) NOT NULL,
   role           VARCHAR(20)  NOT NULL DEFAULT 'user' CHECK (role IN ('admin', 'user')),
+  avatar_data    TEXT,
   created_at     TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
 
 CREATE INDEX IF NOT EXISTS idx_usuarios_email ON usuarios (email);
+
+-- Movimientos: ingresos y gastos que el usuario registra, y que alimentan
+-- el grafico y el balance del dashboard.
+CREATE TABLE IF NOT EXISTS movimientos (
+  id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  usuario_id   UUID NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+  categoria    VARCHAR(30) NOT NULL CHECK (categoria IN ('ingresos', 'gastos', 'impuestos', 'fondo_emergencia')),
+  descripcion  VARCHAR(150) NOT NULL,
+  monto        NUMERIC(12, 2) NOT NULL CHECK (monto > 0),
+  fecha        TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_movimientos_usuario ON movimientos (usuario_id, fecha DESC);

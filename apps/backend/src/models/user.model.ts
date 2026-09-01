@@ -6,6 +6,7 @@ export interface User {
   email: string;
   passwordHash: string;
   role: Role;
+  avatarData: string | null;
   createdAt: string;
 }
 

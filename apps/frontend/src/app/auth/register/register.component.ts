@@ -19,7 +19,23 @@ export class RegisterComponent {
   exito = '';
   cargando = false;
 
+  // Controla si los campos de password se muestran en texto plano (ojito).
+  mostrarPassword = false;
+  mostrarConfirmPassword = false;
+
+  // Mismo mecanismo que en el login: si assets/logo/logo.png todavia no
+  // existe, se evita mostrar una imagen rota.
+  logoCargado = false;
+
   constructor(private auth: AuthService, private router: Router) {}
+
+  onLogoLoad(): void {
+    this.logoCargado = true;
+  }
+
+  onLogoError(): void {
+    this.logoCargado = false;
+  }
 
   onSubmit(): void {
     this.error = '';

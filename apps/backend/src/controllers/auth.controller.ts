@@ -62,3 +62,27 @@ export async function profile(req: AuthRequest, res: Response) {
   }
   return res.json({ user: toPublicUser(usuario) });
 }
+
+// Limite generoso para no rechazar fotos de perfil razonables (una vez
+// comprimidas en el navegador antes de subirlas), pero sin permitir
+// payloads absurdamente grandes.
+const TAMANO_MAXIMO_AVATAR_BYTES = 3 * 1024 * 1024; // ~3MB en base64
+
+export async function updateAvatar(req: AuthRequest, res: Response) {
+  const { avatarData } = req.body;
+
+  if (!avatarData || typeof avatarData !== 'string' || !avatarData.startsWith('data:image/')) {
+    return res.status(400).json({ message: 'La imagen debe enviarse como data URL (data:image/...)' });
+  }
+
+  if (avatarData.length > TAMANO_MAXIMO_AVATAR_BYTES) {
+    return res.status(413).json({ message: 'La imagen es demasiado grande' });
+  }
+
+  const usuario = await usuarioRepo.actualizarAvatar(req.user!.userId, avatarData);
+  if (!usuario) {
+    return res.status(404).json({ message: 'Usuario no encontrado' });
+  }
+
+  return res.json({ user: toPublicUser(usuario) });
+}

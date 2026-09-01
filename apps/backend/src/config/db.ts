@@ -74,12 +74,19 @@ export async function ensureDatabase(): Promise<void> {
 }
 
 /**
- * Crea el esquema (tabla usuarios) si todavia no existe dentro de DB_NAME.
+ * Crea el esquema (tablas usuarios y movimientos) si todavia no existe
+ * dentro de DB_NAME, y agrega columnas nuevas a tablas ya existentes
+ * (por ejemplo, si el usuario ya tenia la tabla "usuarios" creada de una
+ * version anterior sin la columna de foto de perfil).
  */
 export async function ensureSchema(): Promise<void> {
   const schemaPath = path.join(__dirname, '../db/schema.sql');
   const schemaSql = fs.readFileSync(schemaPath, 'utf-8');
   await pool.query(schemaSql);
+
+  // Migracion aditiva: por si la tabla "usuarios" ya existia de una
+  // version anterior sin esta columna.
+  await pool.query('ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS avatar_data TEXT');
 }
 
 export async function verificarConexion(): Promise<void> {
