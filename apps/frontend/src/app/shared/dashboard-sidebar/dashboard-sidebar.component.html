@@ -31,10 +31,10 @@
       Gastos
     </a>
 
-    <button class="menu-item" type="button" (click)="avisarProximamente()">
+    <a class="menu-item" [class.active]="activo === 'ingresos'" routerLink="/ingresos">
       <span class="menu-emoji">📈</span>
       Ingresos
-    </button>
+    </a>
 
     <button class="menu-item" type="button" (click)="avisarProximamente()">
       <span class="menu-emoji">🧾</span>

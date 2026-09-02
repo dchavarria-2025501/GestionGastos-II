@@ -11,7 +11,7 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class DashboardSidebarComponent {
   // Cual item resaltar como activo: 'dashboard' | 'gastos'
-  @Input() activo: 'dashboard' | 'gastos' = 'dashboard';
+  @Input() activo: 'dashboard' | 'gastos' | 'ingresos' | 'profile' = 'dashboard';
 
   @Output() proximamente = new EventEmitter<void>();
 

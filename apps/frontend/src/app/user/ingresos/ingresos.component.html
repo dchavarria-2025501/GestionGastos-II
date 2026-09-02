@@ -1,0 +1,85 @@
+<div class="dashboard-layout">
+  <app-dashboard-sidebar 
+    activo="ingresos" 
+    (proximamente)="avisarProximamente()">
+  </app-dashboard-sidebar>
+
+  <main class="dashboard-main">
+    <!-- Banner Superior (Flecha Morada corregida al 100% de ancho) -->
+    <div class="top-header">
+      <div class="header-title">
+        <h1>Mis Ingresos</h1>
+        <p>Registra y revisa todos tus ingresos en un solo lugar.</p>
+      </div>
+    </div>
+
+    <div class="dashboard-body gastos-body">
+      <!-- Columna Izquierda: Formulario e indicador -->
+      <div class="card">
+        <h3>Agregar ingreso</h3>
+
+        <div class="balance-card">
+          <span class="balance-label">Total en ingresos</span>
+          <!-- Flecha Verde corregida: Texto en color oscuro #2b3332 -->
+          <h2 class="balance-amount" style="color: #2b3332;">
+            <span class="balance-moneda">Q</span>
+            <span class="balance-entero">{{ totalIngresos | number:'1.2-2' }}</span>
+          </h2>
+        </div>
+
+        <form (ngSubmit)="agregarIngreso()" class="gastos-form">
+          <label>DESCRIPCION</label>
+          <input 
+            type="text" 
+            [(ngModel)]="nuevaDescripcion" 
+            name="descripcion" 
+            placeholder="Ej. Sueldo, Freelance, Bono..." 
+            required 
+          />
+
+          <label>MONTO (Q)</label>
+          <input 
+            type="number" 
+            step="0.01" 
+            [(ngModel)]="nuevoMonto" 
+            name="monto" 
+            placeholder="0.00" 
+            required 
+          />
+
+          <button type="submit" class="btn-primary">Agregar ingreso</button>
+        </form>
+      </div>
+
+      <!-- Columna Derecha: Historial -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Historial de ingresos</h3>
+          <span class="auth-footer" style="margin:0;">{{ ingresosList.length }} en total</span>
+        </div>
+
+        <div class="table-head">
+          <span>Descripcion</span>
+          <span>Fecha</span>
+          <span>Monto</span>
+          <span style="text-align: center;">Acciones</span>
+        </div>
+
+        <div class="table-body gastos-table-body">
+          <div *ngIf="ingresosList.length === 0" class="tabla-vacia">
+            No hay ingresos registrados.
+          </div>
+
+          <div class="table-row" *ngFor="let ingreso of ingresosList; let i = index">
+            <span>{{ ingreso.descripcion }}</span>
+            <small>{{ ingreso.fecha }}</small>
+            <span><strong>Q. {{ ingreso.monto | number:'1.2-2' }}</strong></span>
+            <div style="text-align: center;">
+              <button type="button" class="eliminar-btn" (click)="eliminarIngreso(i)">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
